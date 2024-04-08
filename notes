@@ -1,0 +1,83 @@
+        lecture ??  |   mon 08/04-24
+    Feedback oblig 1, Q&A oblig 2
+
+    storage dense vs sparse matrix format
+nxn matrix vs. CRS
+
+nxn integers = n^2 * 4bytes
+
+CRS:
+2*NNZ + n+1 integers = (2*NNZ * n+1)*4bytes
+
+book makes mistake why n+1
+    because when iterating over the row_ptr, you need to know when to stop,
+    should you be at the end
+
+"""NNZ = e
+>>> n = 4039
+>>> e = 88234
+>>> n**2
+16313521
+>>> e/n**2
+0.005408642315782105
+>>> CRS = 2*e + n+1
+>>> CRS/(n**2)
+0.011064931966557067
+"""all n^2 and CRS/.. need 4*(..) for bytes of integer storage
+
+for(file)
+    /*rows[from]++; or*/ rows[from+1]
+for(i in range(len(rows)))
+    rows[i] += rows[i-1];
+then move the rows[] to their proper place
+
+parallellism:
+possible?
+"""
+    struct{
+        int index;
+        int distance:
+    } edge;
+
+    edge *minEdge = {-1, INT_MAX};
+
+    pragma omp parallel for reduction(min:minEdge->distance)
+    for(v range(n))
+        if( !visited[v] && d[v]<minEdge->distance )
+            minEdge->index=v; minEdge->distance=d[v];
+    u = minEdge->index;
+"""
+
+notes oblig2:
+reduce random noise (denoising)
+    reduce noise, reduce sharpness of image
+
+
+arrange greyscale image as 2D array of pixel values, mxn size. 
+isotropic diffusion
+    increase pixel instensity by some factor kappa multiplied with a weighted sum of
+    current pixel value and 4 neigjbours.
+
+    retain border values, only smooth interior points
+
+    repeatable smoothing
+
+
+    external library for read&write to JPEG provided.
+
+    MPI, distributed memory parallellization (section 7)
+    suggestion:
+        1D partitionaing for 1 consecutive block of rows. 
+
+        need to communicate with above and bellow neighbour
+        "halo" rows
+
+        recommended all threads except first and last keep 2 halo rows
+
+        ch. 9.3 halo rows/columns
+
+        reading file is serial, process 0 gets this. then split rows into
+        "my_m" rows to allocate local data structure per process. my_m should
+        include halo row(s)
+
+22 days left until due date
