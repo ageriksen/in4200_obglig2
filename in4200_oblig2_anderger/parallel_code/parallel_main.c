@@ -25,6 +25,8 @@ int main(int argc, char *argv[])
 
   MPI_Bcast (&m, 1, MPI_INT, 0, MPI_COMM_WORLD);
   MPI_Bcast (&n, 1, MPI_INT, 0, MPI_COMM_WORLD);
+  MPI_Bcast (&iters, 1, MPI_INT, 0, MPI_COMM_WORLD);
+  MPI_Bcast (&kappa, 1, MPI_FLOAT, 0, MPI_COMM_WORLD);
 
   /* 1D horizontal decomposition of the m x n pixels evenly among the MPI processes */
   /* If there is a neighbor from below, allocate one more row; Same if there is neighbor from above */

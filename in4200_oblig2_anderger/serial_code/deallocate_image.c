@@ -1,6 +1,6 @@
 #include "serial_functions.h"
 
-void allocate_image(image *u, int m, int n)
+void deallocate_image(image *u)
 {
 
 }
