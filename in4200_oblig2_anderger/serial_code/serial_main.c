@@ -11,6 +11,14 @@ int main(int argc, char *argv[])
 
   /* read from command line: kappa, iters, input_jpeg_filename, output_jpeg_filename */
   /* ... */
+  if (argc < 2)
+  {
+      printf("incorrect number of inputs. usage:\n");
+      printf("kappa, iters, input-filename, output-filename\n");
+      return 1;
+  }
+  kappa = (float)*argv[1]; iters = (int)*argv[2]; 
+  input_jpeg_filename = argv[3]; output_jpeg_filename = argv[4];
   import_JPEG_file(input_jpeg_filename, &image_chars, &m, &n, &c);
 
   allocate_image (&u, m, n);

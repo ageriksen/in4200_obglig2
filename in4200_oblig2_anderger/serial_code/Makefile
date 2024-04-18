@@ -2,15 +2,22 @@ CC = gcc
 CFLAGS = -Wall
 LDFLAGS = -L../../example_folder/simple-jpeg/ -lsimplejpeg
 
-#OBJDIR = obj
+OBJDIR = obj
+BINDIR = ../
 
-PROJ = serial_main
+SRCS = $(wildcard *.c)
+HDRS = $(wildcard *.h)
+
+
+PROJ = serial_denoise
+# OBJS = $(OBJDIR)/serial_main.o
 OBJS = serial_main.o
 
 all: simple-jpeg $(PROJ)
 
-$(PROJ): $(OBJS)
-	$(CC) $(CFLAGS) $< -o $@ $(LDFLAGS)
+#$(PROJ): $(OBJS)
+$(PROJ): $(SRCS) $(HDRS)
+	$(CC) $(CFLAGS) $^ $(LDFLAGS) -o ../$@
 	
 simple-jpeg:
 	$(MAKE) -C ../../example_folder/simple-jpeg
@@ -19,7 +26,7 @@ obj-clean:
 	$(RM) *.o
 
 exec-clean: 
-	$(RM) $(PROJ)
+	$(RM) ../$(PROJ)
 
 autosave-clean:
 	$(RM) *~

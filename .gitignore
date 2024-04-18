@@ -3,3 +3,5 @@ example_folder/serial_example/flipped_image.jpg
 example_folder/serial_example/serial_main.o
 
 ./in4200_oblig2_anderger/serial_code/*.o
+example_folder/simple-jpeg
+in4200_oblig2_anderger/serial_denoise
