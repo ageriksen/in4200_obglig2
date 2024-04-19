@@ -1,10 +1,6 @@
 #ifndef __oblig2_serial_functions__
 #define __oblig2_serial_functions__
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <limits.h>
-
 typedef struct
 {
   float** image_data;  /* a 2D array of floats */

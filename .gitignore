@@ -5,3 +5,5 @@ example_folder/serial_example/serial_main.o
 ./in4200_oblig2_anderger/serial_code/*.o
 example_folder/simple-jpeg
 in4200_oblig2_anderger/serial_denoise
+in4200_oblig2_anderger/simple-jpeg
+mona_lisa_denoised.jpg
