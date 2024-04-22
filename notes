@@ -88,3 +88,8 @@ the makefile in example code uses "LDFLAGS", which I assume is lib flags,
 especially wrt. the -L and -l bits. BUT there is no space between the -l's and
 the files/names... does this work and is it the best practice? could one insert
 a space?
+
+
+    q&a lecture
+
+challenge in MPI communication -> a lot of variables and similar to keep track of.

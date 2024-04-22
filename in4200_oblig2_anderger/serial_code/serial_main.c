@@ -4,7 +4,9 @@
 #include <stdlib.h>
 #include <limits.h>
 
-// void test_conversion()
+#include <time.h>
+
+// void test_image_conversion()
 // {
 //   int m, n, c, iters;
 //   float kappa;
@@ -21,11 +23,77 @@
 //   export_JPEG_file(output_jpeg_filename, image_chars, m, n, c, 75);
 // }
 
+void test_diffusion()
+{
+    int m=4, n=4;
+    float *data_storage = (float*)malloc(n*m*sizeof(float));
+    float **data = (float**) malloc(m*sizeof(float*));
+    for (int i=0; i<m; i++) { data[i] = &data_storage[i*n]; }
+    srand(time(NULL));
+
+
+    // int counter;
+    int area=m*n;
+    for (int i=0; i<m; i++)
+    {
+        for (int j=0; j<n; j++) 
+        {
+            data[i][j] = rand()%(area);
+        }
+    }
+    image u, u_bar;
+    u.image_data = data;
+    u.m = m; u.n = n;
+
+    u_bar.m = m;
+    u_bar.n = n;
+    float *data2_storage = (float*)malloc(n*m*sizeof(float));
+    float **data2 = (float**) malloc(m*sizeof(float*));
+    for (int i=0; i<m; i++) { data2[i] = &data2_storage[i*n]; }
+    
+    for (int i=0; i<m; i++)
+    {
+        for (int j=0; j<n; j++) 
+        {
+            data2[i][j] = INT_MAX;
+        }
+    }
+    u_bar.image_data = data2;
+    
+
+
+    printf("test image array:\n");
+    printf("[%f %f %f %f]\n", 
+            u.image_data[0][0], u.image_data[0][1], u.image_data[0][2], u.image_data[0][2]);
+    printf("[%f %f %f %f]\n", 
+            u.image_data[1][0], u.image_data[1][1], u.image_data[1][2], u.image_data[1][2]);
+    printf("[%f %f %f %f]\n", 
+            u.image_data[2][0], u.image_data[2][1], u.image_data[2][2], u.image_data[2][2]);
+    printf("[%f %f %f %f]\n", 
+            u.image_data[3][0], u.image_data[3][1], u.image_data[3][2], u.image_data[3][2]);
+
+    float kappa = 1; int iters = 1;
+    iso_diffusion_denoising (&u, &u_bar, kappa, iters);
+
+    printf("test image array diffusion:\n");
+    printf("[%f %f %f %f]\n", 
+            u_bar.image_data[0][0], u_bar.image_data[0][1], u_bar.image_data[0][2], u_bar.image_data[0][2]);
+    printf("[%f %f %f %f]\n", 
+            u_bar.image_data[1][0], u_bar.image_data[1][1], u_bar.image_data[1][2], u_bar.image_data[1][2]);
+    printf("[%f %f %f %f]\n", 
+            u_bar.image_data[2][0], u_bar.image_data[2][1], u_bar.image_data[2][2], u_bar.image_data[2][2]);
+    printf("[%f %f %f %f]\n", 
+            u_bar.image_data[3][0], u_bar.image_data[3][1], u_bar.image_data[3][2], u_bar.image_data[3][2]);
+    
+}
+
 int main(int argc, char *argv[])
 {
 
-    // test_conversion();
+    // test_image_conversion();
     // return -14;
+    test_diffusion();
+    return -6;
     int m, n, c, iters;
     float kappa;
     image u, u_bar;
