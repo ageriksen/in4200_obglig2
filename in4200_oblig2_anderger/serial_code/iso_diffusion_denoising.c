@@ -36,4 +36,13 @@ void iso_diffusion_denoising(image *u, image *u_bar, float kappa, int iters)
     //     u_bar = u;
     //     u = temp;
     // }
+
+
+    // for (int i=1; i<(u->m)-1; i++) 
+    // {
+    //     for (int j=1; j<(u->n)-1; j++) 
+    //     {
+    //         u_bar->image_data[i][j] = u->image_data[i][j];
+    //     }
+    // }
 }
