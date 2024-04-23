@@ -26,13 +26,14 @@
 void test_diffusion()
 {
     int m=4, n=4;
-    float *data_storage = (float*)malloc(n*m*sizeof(float));
-    float **data = (float**) malloc(m*sizeof(float*));
-    for (int i=0; i<m; i++) { data[i] = &data_storage[i*n]; }
-    srand(time(NULL));
+    // srand(time(NULL));
+    srand(5);
 
 
     // int counter;
+    float *data_storage = (float*)malloc(n*m*sizeof(float));
+    float **data = (float**) malloc(m*sizeof(float*));
+    for (int i=0; i<m; i++) { data[i] = &data_storage[i*n]; }
     int area=m*n;
     for (int i=0; i<m; i++)
     {
@@ -64,26 +65,26 @@ void test_diffusion()
 
     printf("test image array:\n");
     printf("[%f %f %f %f]\n", 
-            u.image_data[0][0], u.image_data[0][1], u.image_data[0][2], u.image_data[0][2]);
+            u.image_data[0][0], u.image_data[0][1], u.image_data[0][2], u.image_data[0][3]);
     printf("[%f %f %f %f]\n", 
-            u.image_data[1][0], u.image_data[1][1], u.image_data[1][2], u.image_data[1][2]);
+            u.image_data[1][0], u.image_data[1][1], u.image_data[1][2], u.image_data[1][3]);
     printf("[%f %f %f %f]\n", 
-            u.image_data[2][0], u.image_data[2][1], u.image_data[2][2], u.image_data[2][2]);
+            u.image_data[2][0], u.image_data[2][1], u.image_data[2][2], u.image_data[2][3]);
     printf("[%f %f %f %f]\n", 
-            u.image_data[3][0], u.image_data[3][1], u.image_data[3][2], u.image_data[3][2]);
+            u.image_data[3][0], u.image_data[3][1], u.image_data[3][2], u.image_data[3][3]);
 
     float kappa = 1; int iters = 1;
     iso_diffusion_denoising (&u, &u_bar, kappa, iters);
 
     printf("test image array diffusion:\n");
     printf("[%f %f %f %f]\n", 
-            u_bar.image_data[0][0], u_bar.image_data[0][1], u_bar.image_data[0][2], u_bar.image_data[0][2]);
+            u_bar.image_data[0][0], u_bar.image_data[0][1], u_bar.image_data[0][2], u_bar.image_data[0][3]);
     printf("[%f %f %f %f]\n", 
-            u_bar.image_data[1][0], u_bar.image_data[1][1], u_bar.image_data[1][2], u_bar.image_data[1][2]);
+            u_bar.image_data[1][0], u_bar.image_data[1][1], u_bar.image_data[1][2], u_bar.image_data[1][3]);
     printf("[%f %f %f %f]\n", 
-            u_bar.image_data[2][0], u_bar.image_data[2][1], u_bar.image_data[2][2], u_bar.image_data[2][2]);
+            u_bar.image_data[2][0], u_bar.image_data[2][1], u_bar.image_data[2][2], u_bar.image_data[2][3]);
     printf("[%f %f %f %f]\n", 
-            u_bar.image_data[3][0], u_bar.image_data[3][1], u_bar.image_data[3][2], u_bar.image_data[3][2]);
+            u_bar.image_data[3][0], u_bar.image_data[3][1], u_bar.image_data[3][2], u_bar.image_data[3][3]);
     
 }
 
