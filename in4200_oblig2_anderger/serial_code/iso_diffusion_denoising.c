@@ -14,10 +14,10 @@ void iso_diffusion_denoising(image *u, image *u_bar, float kappa, int iters)
         // printf("u[%d][n-1=%d] = %f\n", rows, (u->n)-1, u->image_data[rows][(u->n)-1]);
         u_bar->image_data[rows][(u->n) - 1] = u->image_data[rows][(u->n) - 1]; // Copy rightmost column
     }
-    // image *temp;
-    //
-    // for (int iteration=0; iteration<iters; iteration++) 
-    // {
+
+    image *temp;
+    for (int iteration=0; iteration<iters; iteration++) 
+    {
         for (int i=1; i<(u->m)-1; i++) 
         {
             for (int j=1; j<(u->n)-1; j++) 
@@ -32,17 +32,10 @@ void iso_diffusion_denoising(image *u, image *u_bar, float kappa, int iters)
                 // printf("denoised image data: %f\n", u_bar->image_data[i][j]);
             }
         }
-    //     temp = u_bar;
-    //     u_bar = u;
-    //     u = temp;
-    // }
+        temp = u_bar;
+        u_bar = u;
+        u = temp;
+    }
+    u_bar = u;
 
-
-    // for (int i=1; i<(u->m)-1; i++) 
-    // {
-    //     for (int j=1; j<(u->n)-1; j++) 
-    //     {
-    //         u_bar->image_data[i][j] = u->image_data[i][j];
-    //     }
-    // }
 }
