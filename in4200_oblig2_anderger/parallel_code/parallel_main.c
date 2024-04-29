@@ -40,7 +40,12 @@ int main(int argc, char *argv[])
 
     /* 1D horizontal decomposition of the m x n pixels evenly among the MPI processes */
     /* If there is a neighbor from below, allocate one more row; Same if there is neighbor from above */
-    my_m = ...;
+    my_m = m/num_procs+2; // base size + 2 ghost rows
+    if (my_rank<(m%num_procs)) {my_m++; } // add eventual remainder rows
+    int my_stride = my_m -2;
+    if (my_rank == 0) { my_m--; } // if top or bottom, only 1 ghost, so remove 1 row
+    if (my_rank == num_procs-1) { my_m--; }
+    // my_m = ...;
 
     allocate_image (&u, my_m, n);
     allocate_image (&u_bar, my_m, n);
